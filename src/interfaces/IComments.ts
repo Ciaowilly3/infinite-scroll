@@ -9,4 +9,4 @@ export interface IComment {
 
 export type IComments = IComment[]; 
 
-export const initialComments = [];
+export const initialComments : IComments = [];

@@ -1,17 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useCallback, useEffect, useState } from 'react'
 import { IComments, initialComments } from '../../interfaces/IComments'
+import axios from 'axios'
 
 
-const CardsContainer = () => {
+const CardsContainer :React.FC = () => {
     const [comments, setComments] = useState<IComments>(initialComments) 
 
-    useEffect(() =>{
-        console.log("abda")
-    })
-    
+    useEffect(() => fetchComments,[])
 
+    
+    const fetchComments = useCallback(() =>{
+        const baseUrl : string = 'https://dummyjson.com/comments' 
+        axios.get(baseUrl)
+            .then(response => setComments(response.data.comments)
+            )
+            console.log(comments)
+    }, [])
     return (
-        <div>CardsContainer</div>
+        <div>
+            comments
+            {
+                comments.map((comment, index) => (
+                    <div key={index}>commento id: {comment.id}</div>
+                ))
+            }
+        </div>
     )
 }
 
